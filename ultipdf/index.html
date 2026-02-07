@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online PDF editor - Merge, Split, Compress, Convert, Edit PDFs directly in your browser. No upload required. 100% secure.">
+    <meta name="keywords" content="PDF editor, merge PDF, compress PDF, PDF to Word, edit PDF online, free PDF tools">
+    <meta name="author" content="UltiPDF">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="UltiPDF - Professional PDF Editor in Your Browser">
+    <meta property="og:description" content="Free, fast, and secure PDF editing tools. All processing happens locally.">
+    <meta property="og:type" content="website">
+    
+    <title>UltiPDF | Professional PDF Editor - Free & Secure</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- PDF Libraries -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/downloadjs@1.4.7/download.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    
+    <!-- Additional Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script src="https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+</head>
+<body>
+
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="grid-overlay"></div>
+
+    <nav class="glass-nav">
+        <div class="brand" onclick="app.router.go('home')" role="button" tabindex="0" aria-label="Go to home">
+            <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+            <span>UltiPDF</span>
+        </div>
+        <div class="nav-items">
+            <a onclick="app.router.go('home')" role="button" tabindex="0">Home</a>
+            <a onclick="app.router.go('dashboard')" role="button" tabindex="0">Tools</a>
+            <button class="theme-toggle" onclick="app.toggleTheme()" aria-label="Toggle dark mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="btn-glow" onclick="app.router.go('dashboard')">Launch App</button>
+        </div>
+    </nav>
+
+    <main id="app">
+        
+        <!-- HOME VIEW -->
+        <section id="view-home" class="view active">
+            <div class="hero-content">
+                <span class="badge-pill">✨ 100% Client-Side Privacy</span>
+                <h1 class="hero-title">Professional PDF Editor <br><span class="gradient-text">In Your Browser</span></h1>
+                <p class="hero-sub">Merge, Convert, Edit, and Compress PDFs instantly. No uploads. No limits. Completely free.</p>
+                
+                <div class="cta-group">
+                    <button class="btn-primary-lg" onclick="app.router.go('dashboard')">
+                        Start Editing Free <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <button class="btn-secondary-lg" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+                        View Features
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-row glass-panel" id="features">
+                <div class="stat-item">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3>100% Secure</h3>
+                    <p>Files never leave your device</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h3>Lightning Fast</h3>
+                    <p>Instant processing, no waiting</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-infinity"></i>
+                    <h3>Unlimited Use</h3>
+                    <p>No limits, free forever</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-palette"></i>
+                    <h3>Feature Rich</h3>
+                    <p>25+ professional tools</p>
+                </div>
+            </div>
+
+            <div class="privacy-notice glass-panel" style="margin-top: 3rem; padding: 2rem; text-align: center;">
+                <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-lock"></i> Privacy First</h3>
+                <p style="color: var(--text-muted); line-height: 1.8;">
+                    All PDF processing happens directly in your browser using JavaScript. 
+                    Your files are <strong>never uploaded to any server</strong>. 
+                    We don't store, see, or have access to your documents. 
+                    Your data stays 100% private and secure on your device.
+                </p>
+            </div>
+        </section>
+
+        <!-- DASHBOARD VIEW -->
+        <section id="view-dashboard" class="view">
+            <div class="section-header">
+                <h2>PDF Tools</h2>
+                <p>Select a category or tool to begin</p>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="category-filters">
+                <button class="filter-pill active" data-category="all" onclick="app.filterTools('all')">
+                    <i class="fa-solid fa-grip"></i> All Tools
+                </button>
+                <button class="filter-pill" data-category="organize" onclick="app.filterTools('organize')">
+                    <i class="fa-solid fa-layer-group"></i> Organize
+                </button>
+                <button class="filter-pill" data-category="optimize" onclick="app.filterTools('optimize')">
+                    <i class="fa-solid fa-gauge-high"></i> Optimize
+                </button>
+                <button class="filter-pill" data-category="convert" onclick="app.filterTools('convert')">
+                    <i class="fa-solid fa-repeat"></i> Convert
+                </button>
+                <button class="filter-pill" data-category="edit" onclick="app.filterTools('edit')">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                </button>
+                <button class="filter-pill" data-category="security" onclick="app.filterTools('security')">
+                    <i class="fa-solid fa-lock"></i> Security
+                </button>
+            </div>
+
+            <!-- Tools Grid -->
+            <div class="tools-grid" id="tools-grid"></div>
+
+            <!-- Recent Files -->
+            <div class="recent-files-section" id="recent-files-section" style="margin-top: 3rem;">
+                <h3 style="margin-bottom: 1rem; color: var(--text-muted); font-size: 1rem;">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Recent Activity
+                </h3>
+                <div id="recent-files-list" class="recent-files-list"></div>
+            </div>
+        </section>
+
+        <!-- WORKSPACE VIEW -->
+        <section id="view-workspace" class="view">
+            <div class="workspace-layout">
+                <div class="workspace-header">
+                    <button class="btn-back" onclick="app.reset()">
+                        <i class="fa-solid fa-chevron-left"></i> Back to Tools
+                    </button>
+                    <h3 id="current-tool-name">Tool Name</h3>
+                </div>
+
+                <div class="glass-panel workspace-main">
+                    
+                    <!-- Drop Zone -->
+                    <div id="drop-zone" class="drop-zone">
+                        <div class="icon-circle">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <h3>Drop files here</h3>
+                        <p id="drop-zone-subtitle">or click to browse</p>
+                        <input type="file" id="file-input" hidden>
+                    </div>
+
+                    <!-- Editor Area -->
+                    <div id="editor-area" class="editor-area hidden">
+                        <div class="editor-toolbar">
+                            <span id="file-info-badge" class="file-badge">0 Files</span>
+                            <div id="tool-specific-controls" class="tool-controls"></div>
+                        </div>
+
+                        <div id="thumbnails-grid" class="thumbnails-grid"></div>
+
+                        <div class="action-footer">
+                            <button class="btn-text" onclick="app.reset()">Cancel</button>
+                            <button id="process-btn" class="btn-primary-lg">
+                                Process Files <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Loader -->
+                    <div id="loader" class="loader-overlay hidden">
+                        <div class="loader-content">
+                            <div class="spinner-modern"></div>
+                            <h4 id="loader-text">Processing...</h4>
+                            <p id="loader-sub">Please wait, do not close this tab.</p>
+                            
+                            <div class="progress-track">
+                                <div id="progress-fill" class="progress-fill"></div>
+                            </div>
+                            <div id="progress-percent" class="progress-percent">0%</div>
+                        </div>
+                    </div>
+
+                    <!-- Result Area -->
+                    <div id="result-area" class="result-area hidden">
+                        <div class="success-anim">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h3>Processing Complete!</h3>
+                        <div id="download-container"></div>
+                        <button class="btn-text" onclick="app.reset()">Process Another File</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" role="alert" aria-live="polite"></div>
+
+    <!-- Modal Container -->
+    <div id="modal-overlay" class="modal-overlay hidden" onclick="UI.closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="UI.closeModal()" aria-label="Close modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <p>&copy; 2024 UltiPDF. All rights reserved. | <a href="#" onclick="UI.showPrivacyModal()">Privacy Policy</a></p>
+    </footer>
+
+    <script>
+        // Configure PDF.js Worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+    </script>
+    
+    <!-- Load Scripts in Order -->
+    <script src="js/pdf-utils.js"></script>
+    <script src="js/tools/organize.js"></script>
+    <script src="js/tools/optimize.js"></script>
+    <script src="js/tools/convert-from.js"></script>
+    <script src="js/tools/convert-to.js"></script>
+    <script src="js/tools/edit.js"></script>
+    <script src="js/tools/security.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

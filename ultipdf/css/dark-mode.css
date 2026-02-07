@@ -1,0 +1,93 @@
+/* Light Mode Theme Variables */
+body.light-mode {
+    --bg-dark: #f8fafc;
+    --bg-secondary: #e2e8f0;
+    --primary: #6366f1;
+    --primary-glow: #4f46e5;
+    --accent: #d946ef;
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+body.light-mode .bg-orb {
+    opacity: 0.2;
+}
+
+body.light-mode .orb-1 {
+    background: #6366f1;
+}
+
+body.light-mode .orb-2 {
+    background: #d946ef;
+}
+
+body.light-mode .grid-overlay {
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
+body.light-mode .glass-nav {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+body.light-mode .tool-card {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+body.light-mode .tool-card:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+body.light-mode .page-thumb {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+body.light-mode .drop-zone {
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode .drop-zone:hover {
+    background: rgba(99, 102, 241, 0.05);
+}
+
+body.light-mode .filter-pill {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+body.light-mode .toast {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--text-main);
+}
+
+body.light-mode .loader-overlay {
+    background: rgba(248, 250, 252, 0.95);
+}
+
+body.light-mode .modal-content {
+    background: #ffffff;
+}
+
+body.light-mode .recent-file-item {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+body.light-mode .tool-controls input,
+body.light-mode .tool-controls select {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-main);
+}
+
+/* Theme toggle icon change */
+body.light-mode .theme-toggle i::before {
+    content: "\f185"; /* fa-sun */
+}
